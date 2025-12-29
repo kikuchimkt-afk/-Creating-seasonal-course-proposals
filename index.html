@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECC在校生向け季節講習提案書ジェネレーター</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+<script>
+    window.onerror = function (msg, url, lineNo, columnNo, error) {
+        if (msg.toLowerCase().indexOf("script error") > -1) {
+            alert('Script Error: See Browser Console for Detail');
+        } else {
+            // alert('Error: ' + msg); // Suppress alert to avoid annoyance, check console
+            console.error(msg, url, lineNo, error);
+        }
+        return false;
+    };
+</script>
+
+<body>
+
+    <div id="no-print-ui" class="app-container">
+        <header class="tool-header">
+            <h1>ECC在校生向け季節講習提案作成</h1>
+            <div class="api-key-container">
+                <div class="api-key-config">
+                    <label for="apiKey">Gemini API Key:</label>
+                    <input type="password" id="apiKey" placeholder="Enter API Key">
+                    <button id="saveKeyBtn">保存</button>
+                </div>
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" class="api-link">🔑 APIキーを取得 (Google AI
+                    Studio)</a>
+                <p id="api-error-msg" style="color: red; display: none; margin: 5px 0 0 0; font-size: 0.9rem;">
+                    APIキーを入力してください</p>
+            </div>
+        </header>
+
+        <main class="tool-main">
+            <section id="setup-panel" class="panel">
+                <h2>1. 基本設定</h2>
+
+                <div class="form-group">
+                    <label>教室選択</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="school" value="aizumi" checked> ECCベストワン藍住</label>
+                        <label><input type="radio" name="school" value="kitajima"> ECCベストワン北島中央</label>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>対象生徒</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="studentType" value="jh" checked> 中学生</label>
+                        <label><input type="radio" name="studentType" value="hs"> 高校生</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>講習種別</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="season" value="spring" checked> 春期講習</label>
+                        <label><input type="radio" name="season" value="summer"> 夏期講習</label>
+                        <label><input type="radio" name="season" value="winter"> 冬期講習</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>学校ロゴ (任意)</label>
+                    <select id="logoSelect">
+                        <option value="">（デフォルト）</option>
+                    </select>
+                </div>
+
+                <button id="startQuestionsBtn" class="primary-btn">入力を開始</button>
+            </section>
+
+            <section id="questions-panel" class="panel hidden">
+                <h2>2. 生徒プロファイル・提案詳細入力</h2>
+
+                <!-- 手書き資料アップロード (Reference Data) -->
+                <div class="form-group upload-section"
+                    style="border: 2px dashed #bbb; padding: 10px; background: #fafafa; border-radius: 6px; margin-bottom: 20px;">
+                    <label style="color:#555; font-size: 0.9rem;">📎 参考データ: 模試成績表(5枚まで) または 手書き提案書</label>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:5px;">
+                        <input type="file" id="handwrittenDocs" accept="image/*,application/pdf" multiple
+                            style="flex:1; font-size:0.9rem;">
+                        <span id="file-status" style="font-size:0.8rem; font-weight:bold; color:green; display:none;">✓
+                            読込完了</span>
+                    </div>
+                </div>
+
+                <div id="dynamic-form">
+                    <!-- Form injected by script.js -->
+                </div>
+
+                <div class="actions" style="margin-top:20px; text-align:right;">
+                    <button id="backToSetupBtn" class="secondary-btn">戻る</button>
+                    <button id="generateBtn" class="primary-btn" style="width:auto; padding:10px 30px;">提案書を生成</button>
+                </div>
+
+                <div id="loading" class="hidden" style="margin-top:20px;">
+                    <div class="spinner"></div>
+                    <p>AIが手書き資料を解析し、最適な提案書を作成しています...</p>
+                </div>
+            </section>
+
+            <section id="preview-panel" class="panel hidden">
+                <h2>3. プレビュー & 印刷</h2>
+                <div class="actions">
+                    <button id="backToQuestionsBtn" class="secondary-btn">修正する</button>
+                    <button id="printBtn" class="primary-btn">印刷 / PDF保存</button>
+                </div>
+                <div id="result-container" class="preview-content"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Print Area is dynamically generated in preview-panel or separate div -->
+
+    <!-- Scroll Top Button -->
+    <button id="scrollTopBtn" title="トップへ戻る">↑</button>
+
+    <script src="prompts.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
