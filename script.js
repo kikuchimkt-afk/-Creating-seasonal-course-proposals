@@ -345,7 +345,7 @@ printBtn.addEventListener('click', () => {
             <title>印刷プレビュー</title>
             <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
             <style>
-                @page { size: B4 landscape; margin: 0; }
+                @page { size: A4 landscape; margin: 0; }
                 body { margin: 0; padding: 0; background: #ccc; display: flex; justify-content: center; min-height: 100vh; }
                 /* Reset sheet container margins for print */
                 @media print {
@@ -1112,13 +1112,13 @@ function generateB4HTML(state, data) {
             font-family: 'Noto Serif JP', serif;
             background: var(--c-bg); color: var(--c-text);
             box-sizing: border-box; 
-            width: 364mm; height: 257mm; /* B4 Landscape Exact */
-            padding: 10mm;
+            width: 297mm; height: 210mm; /* A4 Landscape Exact */
+            padding: 8mm;
             margin: 0 auto; /* Center in preview */
             overflow: hidden; /* Strict single page */
             display: grid; 
-            gap: 8px;
-            grid-template-rows: 40px auto 1fr 35mm; /* Fixed header, intro, flexible main, fixed roadmap height */
+            gap: 5px;
+            grid-template-rows: 32px auto 1fr 26mm; /* Fixed header, intro, flexible main, fixed roadmap height */
             position: relative;
             border: 1px solid #ccc; /* Border for preview visibility */
         }
@@ -1132,41 +1132,41 @@ function generateB4HTML(state, data) {
         }
 
         .sheet-container h1, .sheet-container h2, .sheet-container h3, .sheet-container p, .sheet-container ul, .sheet-container li { margin: 0; padding: 0; }
-        .sheet-container ul { padding-left: 1.2em; }
+        .sheet-container ul { padding-left: 1.1em; }
         .sheet-container strong { font-weight: bold; color: var(--c-main); }
         
-        .header-area { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--c-main); padding-bottom: 5px; height: 100%; box-sizing: border-box; }
-        .header-title { font-size: 18pt; font-weight: bold; color: var(--c-main); line-height: 1; }
+        .header-area { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--c-main); padding-bottom: 3px; height: 100%; box-sizing: border-box; }
+        .header-title { font-size: 14pt; font-weight: bold; color: var(--c-main); line-height: 1; }
         
-        .intro-area { font-size: 9pt; line-height: 1.3; }
+        .intro-area { font-size: 7.5pt; line-height: 1.25; }
         
-        .main-grid { display: grid; grid-template-columns: 28% 48% 22%; gap: 8px; overflow: hidden; height: 100%; }
-        .col { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .main-grid { display: grid; grid-template-columns: 27% 49% 22%; gap: 5px; overflow: hidden; height: 100%; }
+        .col { display: flex; flex-direction: column; gap: 5px; height: 100%; }
         
-        .box { border: 1px solid var(--c-sub); border-radius: 6px; background: #fff; display: flex; flex-direction: column; overflow: hidden; }
-        .box-header { background: var(--c-main); color: #fff; font-family: 'Noto Sans JP'; font-weight: bold; font-size: 10pt; padding: 2px 10px; }
-        .box-content { padding: 6px; font-size: 8.5pt; line-height: 1.35; flex: 1; overflow-y: hidden; } /* Hide overflow to force fit */
+        .box { border: 1px solid var(--c-sub); border-radius: 5px; background: #fff; display: flex; flex-direction: column; overflow: hidden; }
+        .box-header { background: var(--c-main); color: #fff; font-family: 'Noto Sans JP'; font-weight: bold; font-size: 8.5pt; padding: 2px 8px; }
+        .box-content { padding: 4px 5px; font-size: 7.5pt; line-height: 1.3; flex: 1; overflow-y: hidden; } /* Hide overflow to force fit */
         
         .schedule-box .box-header { background: #666; } .schedule-box { border-color: #666; }
         .message-box .box-header { background: #f08c00; } .message-box { border-color: #f08c00; }
         
         .roadmap-box { 
-            border: 2px solid #008a00; border-radius: 6px; padding: 5px; 
+            border: 2px solid #008a00; border-radius: 5px; padding: 4px; 
             display: flex; flex-direction: column; 
             background: #fff; 
             height: 100%; box-sizing: border-box;
             overflow: hidden;
         }
         .roadmap-header { 
-            background: #008a00; color: #fff; font-size: 9pt; font-weight: bold; 
-            padding: 2px 8px; border-radius: 4px; width: fit-content; margin-bottom: 4px; 
+            background: #008a00; color: #fff; font-size: 8pt; font-weight: bold; 
+            padding: 1px 6px; border-radius: 3px; width: fit-content; margin-bottom: 3px; 
         }
         
         /* Roadmap Horizontal Layout */
         .roadmap-container {
             display: flex !important;
             flex-direction: row !important;
-            gap: 8px !important;
+            gap: 5px !important;
             width: 100%;
             height: 100%;
             align-items: stretch;
@@ -1174,25 +1174,25 @@ function generateB4HTML(state, data) {
         .roadmap-step {
             flex: 1;
             border: 1px solid #008a00;
-            border-radius: 5px;
-            padding: 4px;
+            border-radius: 4px;
+            padding: 3px;
             background: #f9fff9;
             display: flex;
             flex-direction: column;
-            font-size: 8pt;
+            font-size: 7pt;
         }
         .step-date {
             background: #008a00; color: #fff; font-weight: bold; font-size: 0.8em;
-            padding: 1px 4px; border-radius: 3px; display: inline-block; margin-bottom: 2px;
+            padding: 1px 3px; border-radius: 2px; display: inline-block; margin-bottom: 1px;
             align-self: flex-start;
         }
         .step-title {
-            font-weight: bold; font-size: 0.9em; color: #008a00; margin-bottom: 2px;
+            font-weight: bold; font-size: 0.85em; color: #008a00; margin-bottom: 1px;
             border-bottom: 1px dashed #ccc; padding-bottom: 1px;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .step-detail {
-            font-size: 0.8em; color: #333; line-height: 1.2;
+            font-size: 0.75em; color: #333; line-height: 1.15;
             overflow: hidden;
         }
 
@@ -1201,10 +1201,10 @@ function generateB4HTML(state, data) {
         <div class="header-area">
             <div>
                 <div class="header-title">${safeRender(data.title)}</div>
-                <div style="margin-top:2px; font-size:10pt;">${state.answers.student_name || '生徒'} 様 &nbsp; <span style="font-size:0.9em;">作成日: ${dateStr}</span></div>
+                <div style="margin-top:2px; font-size:8.5pt;">${state.answers.student_name || '生徒'} 様 &nbsp; <span style="font-size:0.9em;">作成日: ${dateStr}</span></div>
             </div>
             <div style="text-align:right;">
-                 <div style="font-size:12pt; font-weight:bold; color:#666; font-family:'Noto Sans JP';">${schoolName}</div>
+                 <div style="font-size:10pt; font-weight:bold; color:#666; font-family:'Noto Sans JP';">${schoolName}</div>
             </div>
         </div>
         

@@ -505,7 +505,7 @@ button {
 
 @media print {
     @page {
-        size: B4 landscape;
+        size: A4 landscape;
         margin: 0;
     }
 
